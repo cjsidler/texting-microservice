@@ -2,17 +2,17 @@ require("dotenv").config();
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+const originNumber = process.env.TWILIO_ORIGIN_NUMBER;
+
+const testRecipientNumber = process.env.TWILIO_TEST_RECIPIENT_NUMBER;
+
 const client = require("twilio")(accountSid, authToken);
 
 // Array of objects with a phone number and a message
 const msgObjs = [
     {
-        phoneNumber: "+15555555555",
+        phoneNumber: testRecipientNumber,
         msg: "Sending you a test text message!",
-    },
-    {
-        phoneNumber: "+15555555555",
-        msg: "Sending out another test text message!",
     },
 ];
 
@@ -21,7 +21,7 @@ msgObjs.forEach((msgObj) => {
     client.messages
         .create({
             body: msgObj.msg,
-            from: process.env.TWILIO_NUMBER,
+            from: originNumber,
             to: msgObj.phoneNumber,
         })
         .then((message) => console.log(message))
