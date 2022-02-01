@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,8 @@
   "homepage": "https://github.com/cjsidler/texting-microservice#readme",
   "dependencies": {
     "dotenv": "^14.3.2",
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
     "twilio": "^3.73.1"
   }
 }

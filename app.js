@@ -1,29 +1,73 @@
+/**
+ * @todo Authorize users
+ * @todo Limit texts to 100 maximum per day
+ **/
+
 require("dotenv").config();
+
+const express = require("express");
+const app = express();
+const port = 3000;
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const originNumber = process.env.TWILIO_ORIGIN_NUMBER;
 
-const testRecipientNumber = process.env.TWILIO_TEST_RECIPIENT_NUMBER;
-
 const client = require("twilio")(accountSid, authToken);
 
-// Array of objects with a phone number and a message
-const msgObjs = [
-    {
-        phoneNumber: testRecipientNumber,
-        msg: "Sending you a test text message!",
-    },
-];
+app.use(express.json());
 
-// Send out a text message for each message object in msgObjs
-msgObjs.forEach((msgObj) => {
-    client.messages
+function sendText(msgObj) {
+    /**
+     * Sends a text message using the msgObj passed via Twilio.
+     * Expects a phoneNumber string of a phone number in 10-digit format.
+     * Expects a msg string to send in the body of the text message (320 chars or less in length).
+     **/
+
+    const { phoneNumber, msg } = msgObj;
+
+    return client.messages
         .create({
-            body: msgObj.msg,
+            body: msg.slice(0, 321),
             from: originNumber,
-            to: msgObj.phoneNumber,
+            to: phoneNumber,
         })
-        .then((message) => console.log(message))
-        .catch((err) => console.log(err));
+        .then((message) => {
+            const { body, to, dateCreated, status } = message;
+            const msgRes = {
+                body,
+                to,
+                dateCreated,
+                status,
+            };
+            return msgRes;
+        })
+        .catch((err) => {
+            const { status, code, moreInfo } = err;
+            const errObj = {
+                errorMessage: err.message,
+                errorCode: code,
+                status,
+                to: phoneNumber,
+                body: msg,
+                moreInfo,
+            };
+            return errObj;
+        });
+}
+
+app.post("/send-texts", async (req, res) => {
+    const txtArray = req.body;
+    const resArray = [];
+
+    for (const msgObj of txtArray) {
+        const txtRes = await sendText(msgObj);
+        resArray.push(txtRes);
+    }
+
+    res.json(resArray);
+});
+
+app.listen(port, () => {
+    console.log(`Texting Microservice listening on port ${port}`);
 });
