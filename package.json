@@ -1,27 +1,33 @@
 {
-  "name": "texting-microservice",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cjsidler/texting-microservice.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cjsidler/texting-microservice/issues"
-  },
-  "homepage": "https://github.com/cjsidler/texting-microservice#readme",
-  "dependencies": {
-    "dotenv": "^14.3.2",
-    "express": "^4.17.2",
-    "nodemon": "^2.0.15",
-    "twilio": "^3.73.1"
-  }
+    "name": "texting-microservice",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js",
+        "devStart": "nodemon app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cjsidler/texting-microservice.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/cjsidler/texting-microservice/issues"
+    },
+    "homepage": "https://github.com/cjsidler/texting-microservice#readme",
+    "dependencies": {
+        "bcrypt": "^5.0.1",
+        "express": "^4.17.2",
+        "jsonwebtoken": "^8.5.1",
+        "mongoose": "^6.1.9",
+        "twilio": "^3.73.1"
+    },
+    "devDependencies": {
+        "dotenv": "^15.0.0",
+        "nodemon": "^2.0.15"
+    }
 }
