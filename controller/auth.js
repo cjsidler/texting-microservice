@@ -13,6 +13,7 @@ exports.signup = (req, res) => {
 
     newUser.save((error, user) => {
         if (error) {
+            console.log(error);
             res.status(500).send({ message: error });
             return;
         } else {
@@ -28,6 +29,7 @@ exports.login = (req, res) => {
         email: req.body.email,
     }).exec((error, user) => {
         if (error) {
+            console.log(error);
             res.status(500).send({ message: error });
             return;
         }
