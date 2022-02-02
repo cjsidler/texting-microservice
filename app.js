@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 80;
 const mongoose = require("mongoose");
 const verifyJWTToken = require("./middleware/verifyJWT");
 const { signup, login } = require("./controller/auth.js");
@@ -73,6 +73,10 @@ function sendText(msgObj) {
             return errObj;
         });
 }
+
+app.get("/", function (req, res) {
+    res.send("App is up and running.");
+});
 
 app.post("/sign-up", signup, function (req, res) {});
 
