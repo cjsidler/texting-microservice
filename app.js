@@ -13,12 +13,13 @@ const User = require("./models/user");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const originNumber = process.env.TWILIO_ORIGIN_NUMBER;
+const uri = process.env.MONGODB_URI;
 
 const client = require("twilio")(accountSid, authToken);
 
 // MongoDB connection
 try {
-    mongoose.connect("mongodb://localhost:27017/usersdb", {
+    mongoose.connect(uri, {
         useUnifiedTopology: true,
         useNewUrlParser: true,
     });
