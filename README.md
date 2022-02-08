@@ -2,13 +2,12 @@
 
 -   Microservice for CS361 - Software Engineering I
 -   This microservice will handle sending SMS messages for you
--   Note: This service will only send 100 SMS messages per day combined across all users of the service.
 
 ## How to use
 
 ### Sending texts
 
-Send a x-www-form-urlencoded POST request to http://placeholderlink.com/log-in with the properties "email" and "password". If the email and password match a user account in the database, a token that is good for 12 hours will be returned to you in a JSON object. Also in the JSON object will be an indicator of the remaining number of text messages you can send. Here is an example of the format of the response:
+Send a x-www-form-urlencoded POST request to https://texting-microservice.herokuapp.com/log-in with the properties "email" and "password" with values that match a user account in the database. If the microservice finds a match, a token that is good for 12 hours will be returned to you in a JSON object. Also in the JSON object will be an indicator of the remaining number of text messages you can send. Here is an example of the format of the response:
 
 ```json
 {
@@ -23,7 +22,7 @@ Send a x-www-form-urlencoded POST request to http://placeholderlink.com/log-in w
 }
 ```
 
-Then, send a POST request to http://placeholderlink.com/send-texts with an "authorization" header with a value of the token you received in the previous step. The service will also expect a JSON array of message objects in the body of the POST request. Each message object should have the following attributes:
+Then, send a POST request to https://texting-microservice.herokuapp.com/send-texts with an "authorization" header that has a value of the token you received in the previous step. The service will also expect a JSON array of message objects in the body of the POST request. Each message object should have the following attributes:
 
 1. phoneNumber - This is the phone number you want to send an SMS message to. This phone number must be a string in the full 10-digit format with a plus sign in front.
 
@@ -94,7 +93,7 @@ After a POST request is received a response will be sent in JSON format and will
 
 ## Deployment
 
-http://placeholderlink.com
+https://texting-microservice.herokuapp.com/
 
 ## Sources Cited
 
