@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const verifyJWTToken = require("./middleware/verifyJWT");
 const { signup, login } = require("./controller/auth.js");
 const User = require("./models/user");
+const cors = require("cors");
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
@@ -16,6 +17,8 @@ const originNumber = process.env.TWILIO_ORIGIN_NUMBER;
 const uri = process.env.MONGODB_URI;
 
 const client = require("twilio")(accountSid, authToken);
+
+app.use(cors());
 
 // MongoDB connection
 try {
