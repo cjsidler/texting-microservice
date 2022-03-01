@@ -13,6 +13,8 @@ const verifyJWTToken = (req, res, next) => {
                     req.user = undefined;
                 }
 
+                console.log({ decoded });
+
                 // If JWT is valid, use the MongoDB ObjectId in the JWT to lookup the user in the db.
                 User.findOne({
                     _id: decoded.id,
